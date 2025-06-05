@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock In/Out</title>
+</head>
+<body>
+    <h2>Stock In / Out</h2>
+    <form method="POST">
+        <label>Item Name / Barcode:</label>
+        <input type="text" name="item_identifier" required><br><br>
+
+        <label>Company:</label>
+        <input type="text" name="company"><br>
+
+        <label>Client:</label>
+        <input type="text" name="client"><br>
+
+        <label>Project:</label>
+        <input type="text" name="project"><br>
+
+        <label>Collected By:</label>
+        <input type="text" name="collected_by"><br>
+
+        <label>Quantity:</label>
+        <input type="number" name="quantity" required><br>
+
+        <label>Type:</label>
+        <select name="action">
+            <option value="in">Stock In</option>
+            <option value="out">Stock Out</option>
+        </select><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <br><a href="/dashboard">Back to Dashboard</a>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li style="color:green;">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>

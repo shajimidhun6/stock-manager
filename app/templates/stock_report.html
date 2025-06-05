@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Report</title>
+</head>
+<body>
+    <h2>Stock Balance Report</h2>
+
+    <form method="GET">
+        <input type="text" name="search" placeholder="Search item/client/project" value="{{ search or '' }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Client</th>
+                <th>Direction</th>
+                <th>Item Name</th>
+                <th>Model</th>
+                <th>Quantity</th>
+                <th>Last Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.timestamp.strftime('%Y-%m-%d') if item.timestamp else 'N/A' }}</td>
+                <td>{{ item.client_name }}</td>
+                <td>{{ item.direction }}</td>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.model }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.last_updated.strftime('%Y-%m-%d %H:%M') if item.last_updated else 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>
