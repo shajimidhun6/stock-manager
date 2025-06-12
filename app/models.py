@@ -10,14 +10,15 @@ class User(db.Model, UserMixin):
 
 class StockItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(db.DateTime, nullable=False)
-    client_name = db.Column(db.String(120), nullable=False)
-    direction = db.Column(db.String(10), nullable=False)  # <== New
-    item_name = db.Column(db.String(120), nullable=False)  # <== Updated
-    model = db.Column(db.String(120))  # <== New
-    collected_by = db.Column(db.String(120))
-    quantity = db.Column(db.Integer, nullable=False)
-    last_updated = db.Column(db.DateTime)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    client_name = db.Column(db.String(100))
+    direction = db.Column(db.String(10))  # "IN" or "OUT"
+    item_name = db.Column(db.String(100))
+    model = db.Column(db.String(100))
+    collected_by = db.Column(db.String(100))
+    quantity = db.Column(db.Integer)
+    last_updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
 
 
 

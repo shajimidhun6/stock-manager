@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Stock{% endblock %}
+
+{% block content %}
+<h2>Add New Stock Item</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label class="form-label">Client Name</label>
+        <input type="text" class="form-control" name="client_name" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Direction</label>
+        <select class="form-control" name="direction" required>
+            <option value="IN">IN</option>
+            <option value="OUT">OUT</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Item Name</label>
+        <input type="text" class="form-control" name="item_name" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Model</label>
+        <input type="text" class="form-control" name="model">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Collected By</label>
+        <input type="text" class="form-control" name="collected_by">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Quantity</label>
+        <input type="number" class="form-control" name="quantity" min="1" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Stock</button>
+</form>
+{% endblock %}

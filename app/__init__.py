@@ -7,17 +7,16 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 
 migrate = Migrate()
+
 def create_app():
     app = Flask(__name__)
-    app.secret_key = 'your-secret-key'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///stock.db'
+    app.config['SECRET_KEY'] = 'your_secret_key'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 
     db.init_app(app)
     login_manager.init_app(app)
-    migrate.init_app(app, db)
-    login_manager.login_view = 'main.login'
 
-    from .routes import main
-    app.register_blueprint(main)
+    from .routes import main as main_blueprint
+    app.register_blueprint(main_blueprint)
 
     return app

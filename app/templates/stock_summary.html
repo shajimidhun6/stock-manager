@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Stock Summary</h2>
+
+<form method="POST">
+    <label>Item Name:</label>
+    <select name="item_name">
+        <option value="">All</option>
+        {% for name in item_names %}
+            <option value="{{ name }}" {% if name == selected_item %}selected{% endif %}>{{ name }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Model:</label>
+    <select name="model">
+        <option value="">All</option>
+        {% for model in models %}
+            <option value="{{ model }}" {% if model == selected_model %}selected{% endif %}>{{ model }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Filter</button>
+</form>
+
+{% if summary_data %}
+  <table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
+    <thead>
+      <tr style="background-color: #f2f2f2;">
+        <th>Item Name</th>
+        <th>Model</th>
+        <th>Total IN</th>
+        <th>Total OUT</th>
+        <th>Closing Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in summary_data %}
+      <tr>
+        <td>{{ row.item_name }}</td>
+        <td>{{ row.model }}</td>
+        <td>{{ row.total_in }}</td>
+        <td>{{ row.total_out }}</td>
+        <td>{{ row.closing_balance }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr style="font-weight: bold;">
+        <td colspan="2">Total</td>
+        <td>{{ total_in }}</td>
+        <td>{{ total_out }}</td>
+        <td>{{ closing_balance }}</td>
+      </tr>
+    </tfoot>
+  </table>
+{% if detailed_items %}
+<h3>Transaction History for {{ selected_item }} - {{ selected_model }}</h3>
+<table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Direction</th>
+            <th>Quantity</th>
+            <th>Client</th>
+            <th>Project</th>
+            <th>Company</th>
+            <th>Collected By</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in detailed_items %}
+        <tr>
+            <td>{{ item.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>{{ item.direction }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.client_name }}</td>
+            <td>{{ item.project_name }}</td>
+            <td>{{ item.company_name }}</td>
+            <td>{{ item.collected_by }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+</table>
+{% endif %}
+
+{% else %}
+  <p>No data available.</p>
+{% endif %}
+<a href="/dashboard">Dashboard</a>
+{% endblock %}
