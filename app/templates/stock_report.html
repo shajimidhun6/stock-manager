@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Stock Report</title>
+    {% extends 'base.html' %}
+
+{% block title %}Stock Report{% endblock %}
+
+{% block content %}
 </head>
 <body>
     <h2>Stock Balance Report</h2>
@@ -42,4 +46,5 @@
     <br>
     <a href="/dashboard">Back to Dashboard</a>
 </body>
+{% endblock %}
 </html>

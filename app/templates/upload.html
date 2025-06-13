@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Upload Excel</title>
+    {% extends 'base.html' %}
+
+{% block title %}Upload Excel file{% endblock %}
+
+{% block content %}
 </head>
 <body>
     <h2>Upload Excel File</h2>
@@ -11,4 +15,5 @@
     </form>
     <p><a href="{{ url_for('main.dashboard') }}">Back to Dashboard</a></p>
 </body>
+{% endblock %}
 </html>

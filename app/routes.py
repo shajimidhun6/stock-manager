@@ -38,16 +38,7 @@ def login():
 @main.route('/dashboard')
 @login_required
 def dashboard():
-    return '''
-        <h2>Dashboard</h2>
-        <a href="/add_stock">stock enter</a> |
-        <a href="/upload">Upload Stock Excel</a> |
-        <a href="/stock_report">View Stock Report</a> |
-        
-        <a href="/logout">Logout</a> <br>
-
-    '''
-
+    return render_template('dashboard.html')
 
 @main.route('/logout')
 @login_required
