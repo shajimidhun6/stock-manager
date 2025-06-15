@@ -248,3 +248,11 @@ def stock_summary():
         detailed_items=detailed_items  # 🆕
     )
 
+@main.route('/delete_stock/<int:stock_id>', methods=['POST'])
+@login_required
+def delete_stock(stock_id):
+    stock = StockItem.query.get_or_404(stock_id)
+    db.session.delete(stock)
+    db.session.commit()
+    flash('Stock entry deleted successfully.', 'success')
+    return redirect(url_for('main.stock_report'))
