@@ -9,10 +9,16 @@
 </head>
 <body>
     <h2>Upload Excel File</h2>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="file"><br><br>
-        <button type="submit">Upload</button>
-    </form>
+<!--    <form method="POST" enctype="multipart/form-data">-->
+<!--        <input type="file" name="file"><br><br>-->
+<!--        <button type="submit">Upload</button>-->
+<!--    </form>-->
+    <p><a href="{{ url_for('main.download_sample_excel') }}">Download Sample Excel File</a></p>
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+</form>
     <p><a href="{{ url_for('main.dashboard') }}">Back to Dashboard</a></p>
 </body>
 {% endblock %}

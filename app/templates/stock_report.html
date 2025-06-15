@@ -1,54 +1,58 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}Stock Report{% endblock %}
+{% block content %}
+
 <html>
 <head>
-    {% extends 'base.html' %}
-
-{% block title %}Stock Report{% endblock %}
-
-{% block content %}
+    <meta charset="UTF-8">
 </head>
 <body>
     <h2>Stock Balance Report</h2>
 
     <form method="GET">
         <input type="text" name="search" placeholder="Search item/client/project" value="{{ search or '' }}">
-        <button type="submit">Search</button>
+        <button type="submit" class="btn btn-success mb-1">Search</button>
     </form>
+
     <a href="{{ url_for('main.add_stock') }}" class="btn btn-success mb-3">Add New Stock</a>
-    <a href="{{ url_for('main.stock_summary') }}" class="btn btn-info">Stock Summary</a>
-    <table border="1">
-    <thead>
-        <tr>
-            <th>Item Name</th>
-            <th>Model</th>
-            <th>Client</th>
-            <th>Project</th>
-            <th>Quantity</th>
-            <th>Direction</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in items %}
-        <tr>
-            <td>{{ item.item_name }}</td>
-            <td>{{ item.model }}</td>
-            <td>{{ item.client_name }}</td>
-            <td>{{ item.project_name }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.direction }}</td>
-            <td>
-                <form action="{{ url_for('main.delete_stock', stock_id=item.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this stock entry?');">
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <a href="{{ url_for('main.stock_summary') }}" class="btn btn-success mb-3">Stock Summary</a>
+
+    <table border="1" style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Company Name</th>
+                <th>Model</th>
+                <th>Client</th>
+                <th>Project</th>
+                <th>Quantity</th>
+                <th>Direction</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.company_name }}</td>
+                <td>{{ item.model }}</td>
+                <td>{{ item.client_name }}</td>
+                <td>{{ item.project_name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.direction }}</td>
+                <td>
+                    <form action="{{ url_for('main.delete_stock', stock_id=item.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this stock entry?');">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
     <br>
-    <a href="/dashboard">Back to Dashboard</a>
+    <a href="{{ url_for('main.dashboard') }}">Back to Dashboard</a>
 </body>
-{% endblock %}
 </html>
+{% endblock %}
